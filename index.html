@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register Tamu BPS Kabupaten Halmahera Timur</title>
+    <link rel="icon" href="img/cs.png" type="image/png" />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body>
+    <div class="page-wrapper">
+      <div class="guest-card">
+        <div class="card-header">
+          <img src="img/cs.png" alt="Logo BPS" class="logo" />
+
+          <h1>Buku Tamu Digital BPS Halmahera Timur</h1>
+          <p>Silakan lengkapi data kunjungan Anda</p>
+        </div>
+
+        <div id="notification"></div>
+
+        <!-- STATUS -->
+        <div class="form-group center">
+          <label>Apakah Pernah Bertamu Sebelumnya?</label>
+
+          <div class="radio-group">
+            <label class="radio-card">
+              <input type="radio" name="statusTamu" value="ya" /> Ya
+            </label>
+
+            <label class="radio-card">
+              <input type="radio" name="statusTamu" value="tidak" /> Tidak
+            </label>
+          </div>
+        </div>
+
+        <!-- TAMU BARU -->
+        <div id="newGuest" class="hidden">
+          <div class="form-group">
+            <input type="text" id="name" placeholder="Nama Lengkap" />
+          </div>
+
+          <div class="form-group">
+            <input
+              type="text"
+              id="company"
+              placeholder="Instansi / Perusahaan"
+            />
+          </div>
+
+          <div class="form-group">
+            <select id="purpose">
+              <option value="">Pilih Tujuan Kunjungan</option>
+              <option>Permintaan Data</option>
+              <option>Konsultasi Statistik</option>
+              <option>Rekomendasi Statistik</option>
+              <option>Pembelian Data Mikro, Publikasi, dan Peta Digital</option>
+              <option>Pelayanan Statistik Terpadu (PST)</option>
+              <option>Perpustakaan</option>
+              <option>Penawaran Kerjasama</option>
+              <option>Koordinasi Antar Instansi</option>
+              <option>Diskusi/Koordinasi Kegiatan Statistik</option>
+              <option>Rapat/Pertemuan</option>
+              <option>Lainnya</option>
+            </select>
+          </div>
+
+          <button id="saveGuest" class="btn btn-primary full">
+            Simpan Data
+          </button>
+        </div>
+
+        <!-- TAMU LAMA -->
+        <div id="returningGuest" class="hidden">
+          <div class="form-group">
+            <input
+              type="text"
+              id="searchGuest"
+              placeholder="Cari Nama atau Instansi"
+              autocomplete="off"
+            />
+          </div>
+
+          <!-- DROPDOWN SEARCH -->
+          <div id="searchResultPreview" class="search-preview"></div>
+
+          <div id="guestFound" class="hidden">
+            <div class="form-group">
+              <input type="text" id="oldName" readonly />
+            </div>
+
+            <div class="form-group">
+              <input type="text" id="oldCompany" readonly />
+            </div>
+
+            <div class="form-group">
+              <select id="oldPurpose">
+                <option value="">Pilih Tujuan Kunjungan</option>
+                <option>Permintaan Data</option>
+                <option>Konsultasi Statistik</option>
+                <option>Rekomendasi Statistik</option>
+                <option>
+                  Pembelian Data Mikro, Publikasi, dan Peta Digital
+                </option>
+                <option>Pelayanan Statistik Terpadu (PST)</option>
+                <option>Perpustakaan</option>
+                <option>Penawaran Kerjasama</option>
+                <option>Koordinasi Antar Instansi</option>
+                <option>Diskusi/Koordinasi Kegiatan Statistik</option>
+                <option>Rapat/Pertemuan</option>
+                <option>Lainnya</option>
+              </select>
+            </div>
+
+            <button id="saveOldGuest" class="btn btn-primary full">
+              Simpan Kunjungan
+            </button>
+          </div>
+
+          <p id="notFoundMessage" class="error-message"></p>
+        </div>
+
+        <button id="resetForm" class="btn btn-secondary full mt">
+          Reset Form
+        </button>
+      </div>
+    </div>
+
+    <script src="js/script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,456 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap");
+
+:root {
+  --primary: #0f4c81;
+  --secondary: #1d76d2;
+
+  --background: #eef5fb;
+
+  --text: #1e293b;
+
+  --border: #e2e8f0;
+
+  --white: #fff;
+
+  --muted: #64748b;
+
+  --shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+
+  background: linear-gradient(135deg, #eef5fb, #dbeafe);
+
+  color: var(--text);
+
+  min-height: 100vh;
+}
+
+/* =========================
+   FORM WRAPPER
+========================= */
+
+.page-wrapper {
+  min-height: 100vh;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  padding: 20px;
+}
+
+/* =========================
+   CARD
+========================= */
+
+.guest-card {
+  width: 100%;
+
+  max-width: 500px;
+
+  background: var(--white);
+
+  border-radius: 24px;
+
+  padding: 35px;
+
+  box-shadow: var(--shadow);
+
+  animation: fadeIn 0.8s ease;
+
+  transition: 0.3s;
+}
+
+.guest-card:hover {
+  transform: translateY(-3px);
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.card-header {
+  text-align: center;
+
+  margin-bottom: 25px;
+}
+
+.card-header h1 {
+  color: var(--primary);
+
+  font-size: 30px;
+
+  font-weight: 800;
+
+  margin-bottom: 8px;
+}
+
+.card-header p {
+  color: var(--muted);
+}
+
+/* =========================
+   FORM
+========================= */
+
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-group.center {
+  text-align: center;
+}
+
+label {
+  display: block;
+
+  color: var(--muted);
+
+  font-weight: 500;
+
+  margin-bottom: 8px;
+}
+
+/* INPUT + DROPDOWN */
+
+input,
+select {
+  width: 100%;
+
+  height: 52px;
+
+  border: 1px solid var(--border);
+
+  border-radius: 14px;
+
+  padding: 0 16px;
+
+  font-family: "Inter", sans-serif;
+
+  color: var(--text);
+
+  font-size: 14px;
+
+  background: white;
+
+  transition: 0.3s;
+}
+
+input::placeholder {
+  color: #94a3b8;
+}
+
+input:focus,
+select:focus {
+  outline: none;
+
+  border-color: var(--secondary);
+
+  box-shadow: 0 0 0 4px rgba(29, 118, 210, 0.15);
+}
+
+select {
+  cursor: pointer;
+
+  appearance: auto;
+}
+
+/* =========================
+ RADIO
+========================= */
+
+.radio-group {
+  display: flex;
+
+  justify-content: center;
+
+  gap: 15px;
+
+  margin-top: 15px;
+}
+
+.radio-card {
+  border: 1px solid var(--border);
+
+  padding: 12px 22px;
+
+  border-radius: 12px;
+
+  cursor: pointer;
+
+  transition: 0.3s;
+
+  color: var(--primary);
+}
+
+.radio-card:hover {
+  border-color: var(--secondary);
+}
+
+.radio-card input {
+  width: auto;
+
+  margin-right: 8px;
+
+  accent-color: var(--secondary);
+}
+
+/* =========================
+ BUTTON
+========================= */
+
+.btn {
+  border: none;
+
+  cursor: pointer;
+
+  font-family: "Inter", sans-serif;
+
+  font-weight: 600;
+
+  transition: 0.3s;
+}
+
+.full {
+  width: 100%;
+}
+
+.btn-primary {
+  background: var(--primary);
+
+  color: white;
+
+  height: 52px;
+
+  border-radius: 14px;
+}
+
+.btn-primary:hover {
+  background: var(--secondary);
+
+  transform: translateY(-2px);
+}
+
+.btn-secondary {
+  background: #dbeafe;
+
+  color: var(--primary);
+
+  height: 52px;
+
+  border-radius: 14px;
+}
+
+.btn-secondary:hover {
+  background: #bfdbfe;
+}
+
+.btn-success {
+  background: #10b981;
+
+  color: white;
+}
+
+.btn-danger {
+  background: #ef4444;
+
+  color: white;
+}
+
+.btn-success,
+.btn-danger {
+  padding: 10px 16px;
+
+  border-radius: 10px;
+}
+
+.mt {
+  margin-top: 10px;
+}
+
+/* =========================
+ MESSAGE
+========================= */
+
+.success {
+  background: #dcfce7;
+
+  color: #166534;
+
+  padding: 12px;
+
+  border-radius: 12px;
+
+  margin-bottom: 15px;
+
+  animation: fade 0.4s ease;
+}
+
+.error-message {
+  color: #dc2626;
+
+  text-align: center;
+
+  margin-top: 10px;
+}
+
+/* =========================
+ ANIMATION
+========================= */
+
+.hidden {
+  display: none;
+}
+
+.animated-section {
+  animation: fade 0.4s ease;
+}
+
+.fade {
+  animation: fade 0.4s ease;
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+
+    transform: scale(0.95);
+  }
+
+  to {
+    opacity: 1;
+
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform: translateY(0);
+  }
+}
+
+/* =========================
+ MOBILE
+========================= */
+
+@media (max-width: 768px) {
+  .guest-card {
+    padding: 25px;
+  }
+
+  .card-header h1 {
+    font-size: 24px;
+  }
+
+  .radio-group {
+    flex-direction: column;
+  }
+
+  .btn {
+    width: 100%;
+  }
+}
+
+.search-preview {
+  margin-top: 8px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.search-item {
+  padding: 8px;
+  cursor: pointer;
+  border-bottom: 1px solid #eee;
+}
+
+.search-item:hover {
+  background: #f2f2f2;
+}
+
+.search-item:last-child {
+  border-bottom: none;
+}
+
+.search-preview {
+  margin-top: 6px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fff;
+  max-height: 180px;
+  overflow-y: auto;
+}
+
+.search-item {
+  padding: 10px;
+  cursor: pointer;
+  border-bottom: 1px solid #eee;
+  font-size: 14px;
+}
+
+.search-item:hover {
+  background: #f2f2f2;
+}
+
+.search-item:last-child {
+  border-bottom: none;
+}
+
+.card-header {
+  text-align: center;
+}
+
+.card-header .logo {
+  width: 100px; /* sesuaikan ukuran */
+  height: auto;
+  margin-bottom: 15px;
+}
+
+.card-header .logo {
+  width: 150px; /* sesuaikan ukuran */
+}
+
+.success {
+  background: #e8f5e9;
+  color: #1b5e20;
+  border: 2px solid #4caf50;
+  padding: 15px;
+  border-radius: 10px;
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.loading {
+  background: #fff3cd;
+  color: #856404;
+  border: 2px solid #ffeeba;
+  padding: 14px;
+  border-radius: 10px;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
