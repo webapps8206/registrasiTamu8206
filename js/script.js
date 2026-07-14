@@ -1,11 +1,11 @@
 const API_URL =
-  "https://script.google.com/macros/s/AKfycbzj_qLL3PbAOL5L77_Q_2a0Rfu7iu75ed7meqJxDjljMvA4c3oorsut2cZg0-NWHMR5/exec";
+  "https://script.google.com/macros/s/AKfycbxjgBVIt5vIQuoItAg6LbXs6FeT98Vt8Z_cbuRm2WBDYa0xq9xR7Z5hNvz8u_3_bWl3/exec";
 
 const GET_GUEST_URL =
   "https://script.google.com/macros/s/AKfycbxi9gy-KR84leI6K82_QydgbeSJoF69Frmtt7etOUt_KjUskLJ84_4Q2erc25cAoZLbiw/exec";
 
 const QUEUE_URL =
-  "https://script.google.com/macros/s/AKfycbw41s7GSGZrQ4CDKgptG6GAeIinybLc-_nFAJhsjjqAfbXB7uhAN7fN6xVMrva2DRot/exec";
+  "https://script.google.com/macros/s/AKfycbzojkWu9pRkg0NgGmVlZOb25pzg8LUS5N43f2OzhYjYENLWrdJ82BGHiS_KQr8RNvgP/exec";
 
 let guestData = [];
 
@@ -82,6 +82,7 @@ searchInput.addEventListener("input", () => {
 
       document.getElementById("oldName").value = selected.nama || "";
       document.getElementById("oldCompany").value = selected.instansi || "";
+      document.getElementById("oldPhone").value = selected.nohp || "";
 
       guestFound.classList.remove("hidden");
       previewBox.innerHTML = "";
@@ -95,11 +96,17 @@ document.getElementById("saveGuest").addEventListener("click", () => {
   const nama = document.getElementById("name").value.trim();
   const instansi = document.getElementById("company").value.trim();
   const kegiatan = document.getElementById("purpose").value;
+  const phone = document.getElementById("phone").value.trim();
+  const phoneRule = /^62\d+$/;
 
-  if (!nama || !instansi || !kegiatan)
+  if (!phoneRule.test(phone)) {
+    return showMessage("Nomor HP harus berupa angka dan diawali 62", false);
+  }
+
+  if (!nama || !instansi || !phone || !kegiatan)
     return showMessage("Lengkapi data", false);
 
-  sendData({ nama, instansi, kegiatan });
+  sendData({ nama, instansi, phone, kegiatan });
 });
 
 // SAVE TAMU LAMA
@@ -107,10 +114,11 @@ document.getElementById("saveOldGuest").addEventListener("click", () => {
   const nama = document.getElementById("oldName").value;
   const instansi = document.getElementById("oldCompany").value;
   const kegiatan = document.getElementById("oldPurpose").value;
+  const phone = document.getElementById("oldPhone").value;
 
   if (!kegiatan) return showMessage("Pilih tujuan", false);
 
-  sendData({ nama, instansi, kegiatan });
+  sendData({ nama, instansi, phone, kegiatan });
 });
 
 // SEND DATA
@@ -122,6 +130,7 @@ async function sendData(data) {
     body.append("nama", data.nama);
     body.append("instansi", data.instansi);
     body.append("kegiatan", data.kegiatan);
+    body.append("nohp", data.phone);
 
     const res = await fetch(API_URL, {
       method: "POST",
@@ -136,7 +145,7 @@ async function sendData(data) {
       await new Promise((r) => setTimeout(r, 2000));
 
       const antreanRes = await fetch(
-        "https://script.google.com/macros/s/AKfycbw41s7GSGZrQ4CDKgptG6GAeIinybLc-_nFAJhsjjqAfbXB7uhAN7fN6xVMrva2DRot/exec"
+        "https://script.google.com/macros/s/AKfycbzojkWu9pRkg0NgGmVlZOb25pzg8LUS5N43f2OzhYjYENLWrdJ82BGHiS_KQr8RNvgP/exec"
       );
 
       const antreanJson = await antreanRes.json();
@@ -237,3 +246,11 @@ function animateDots() {
 function clearLoading() {
   clearInterval(dotInterval);
 }
+
+document.getElementById("resetForm").addEventListener("click", resetForm);
+
+const phoneInput = document.getElementById("phone");
+
+phoneInput.addEventListener("input", () => {
+  phoneInput.value = phoneInput.value.replace(/\D/g, "");
+});
