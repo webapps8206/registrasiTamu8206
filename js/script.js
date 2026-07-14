@@ -1,11 +1,11 @@
 const API_URL =
-  "https://script.google.com/macros/s/AKfycbxjgBVIt5vIQuoItAg6LbXs6FeT98Vt8Z_cbuRm2WBDYa0xq9xR7Z5hNvz8u_3_bWl3/exec";
+  "https://script.google.com/macros/s/AKfycbxDiKZDWxi9HAutUhzZ9MCBbGVOZZIOcpMf53DEHHU_L8kGIJnatv_4GduqIsQ-shCI/exec";
 
 const GET_GUEST_URL =
   "https://script.google.com/macros/s/AKfycbxi9gy-KR84leI6K82_QydgbeSJoF69Frmtt7etOUt_KjUskLJ84_4Q2erc25cAoZLbiw/exec";
 
 const QUEUE_URL =
-  "https://script.google.com/macros/s/AKfycbzojkWu9pRkg0NgGmVlZOb25pzg8LUS5N43f2OzhYjYENLWrdJ82BGHiS_KQr8RNvgP/exec";
+  "https://script.google.com/macros/s/AKfycbxCIY4ufDk9JaqucEfl8m-JaQPmM9niNzuqgilPF3FLskL5z4IX0gE5FkSd4DI3HQ-L/exec";
 
 let guestData = [];
 
@@ -83,6 +83,7 @@ searchInput.addEventListener("input", () => {
       document.getElementById("oldName").value = selected.nama || "";
       document.getElementById("oldCompany").value = selected.instansi || "";
       document.getElementById("oldPhone").value = selected.nohp || "";
+      document.getElementById("oldEmail").value = selected.email || "";
 
       guestFound.classList.remove("hidden");
       previewBox.innerHTML = "";
@@ -97,6 +98,14 @@ document.getElementById("saveGuest").addEventListener("click", () => {
   const instansi = document.getElementById("company").value.trim();
   const kegiatan = document.getElementById("purpose").value;
   const phone = document.getElementById("phone").value.trim();
+  const email = document.getElementById("email").value.trim();
+
+  const emailRule = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  if (email && !emailRule.test(email)) {
+    return showMessage("Format email tidak valid", false);
+  }
+
   const phoneRule = /^62\d+$/;
 
   if (!phoneRule.test(phone)) {
@@ -106,7 +115,13 @@ document.getElementById("saveGuest").addEventListener("click", () => {
   if (!nama || !instansi || !phone || !kegiatan)
     return showMessage("Lengkapi data", false);
 
-  sendData({ nama, instansi, phone, kegiatan });
+  sendData({
+    nama,
+    instansi,
+    phone,
+    email: email || "-",
+    kegiatan,
+  });
 });
 
 // SAVE TAMU LAMA
@@ -115,10 +130,17 @@ document.getElementById("saveOldGuest").addEventListener("click", () => {
   const instansi = document.getElementById("oldCompany").value;
   const kegiatan = document.getElementById("oldPurpose").value;
   const phone = document.getElementById("oldPhone").value;
+  const email = document.getElementById("oldEmail").value;
 
   if (!kegiatan) return showMessage("Pilih tujuan", false);
 
-  sendData({ nama, instansi, phone, kegiatan });
+  sendData({
+    nama,
+    instansi,
+    phone,
+    email: email || "-",
+    kegiatan,
+  });
 });
 
 // SEND DATA
@@ -131,6 +153,7 @@ async function sendData(data) {
     body.append("instansi", data.instansi);
     body.append("kegiatan", data.kegiatan);
     body.append("nohp", data.phone);
+    body.append("email", data.email);
 
     const res = await fetch(API_URL, {
       method: "POST",
@@ -145,7 +168,7 @@ async function sendData(data) {
       await new Promise((r) => setTimeout(r, 2000));
 
       const antreanRes = await fetch(
-        "https://script.google.com/macros/s/AKfycbzojkWu9pRkg0NgGmVlZOb25pzg8LUS5N43f2OzhYjYENLWrdJ82BGHiS_KQr8RNvgP/exec"
+        "https://script.google.com/macros/s/AKfycbxCIY4ufDk9JaqucEfl8m-JaQPmM9niNzuqgilPF3FLskL5z4IX0gE5FkSd4DI3HQ-L/exec"
       );
 
       const antreanJson = await antreanRes.json();
